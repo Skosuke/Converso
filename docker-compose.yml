@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - '50052:50051'
+    command: ['./server']
+
+  client:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      - GRPC_TARGET=server:50051
+    depends_on:
+      - server
+    command: ['./client']
+
+  envoy:
+    image: envoyproxy/envoy:v1.21-latest
+    volumes:
+      - ./docker/envoy.yaml:/etc/envoy/envoy.yaml
+    ports:
+      - '8080:8080'
+    depends_on:
+      - server

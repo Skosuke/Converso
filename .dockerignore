@@ -1,0 +1,26 @@
+# Git 関連のファイルを除外
+.git
+.gitignore
+
+# OS 由来の不要なファイル
+.DS_Store
+
+# Go のビルド成果物（バイナリファイル等）
+*.exe
+*.dll
+*.so
+*.dylib
+
+# vendor ディレクトリ（Go Modules を利用している場合は不要）
+/vendor
+
+# Node.js の依存関係
+node_modules
+frontend/node_modules
+
+# フロントエンドのビルド出力（静的ファイルは Dockerfile でコピーするので不要）
+frontend/build
+
+# ログファイルや一時ファイル
+*.log
+tmp/
